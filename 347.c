@@ -53,30 +53,28 @@ int* topKFrequent(int* nums, int numsSize, int k, int* returnSize) {
 	int *ans = (int*)malloc(sizeof(int) * (*returnSize));
 	memset(ans, 0, sizeof(int) * (*returnSize));
 	int hashlen = P;
-	if (hashlen < nums.size()) {
-	    hashlen = (nums.size() << 1) - 1;
+	if (hashlen < numsSize) {
+		hashlen = (numsSize << 1) - 1;
 	}
 	int *hash = (int*)malloc(sizeof(int) * hashlen);
-    memset(hash, 0xff, sizeof(int) * hashlen);
-    int n = 0;
-    struct _map *arr = (struct _map *)malloc(sizeof(struct _map) * nums.size());
-    memset(arr, 0, sizeof(struct _map) * nums.size());
-    for (int i = 0; i < nums.size(); i++) {
-    	find(hash, arr, &n, nums[i], hashlen);
-    }
-    free(hash);
+	memset(hash, 0xff, sizeof(int) * hashlen);
+	int n = 0;
+	struct _map *arr = (struct _map *)malloc(sizeof(struct _map) * numsSize);
+	memset(arr, 0, sizeof(struct _map) * numsSize);
+	for (int i = 0; i < numsSize; i++) {
+		find(hash, arr, &n, nums[i], hashlen);
+	}
 	sort(arr, k - 1, 0, n - 1);
 	for (int i = 0; i < k; i++) {
 		ans[i] = arr[i].value;
 	}
-	free(arr);
 	return ans;
 }
 
 int main() {
-	int nums[5] = { 1,1,2,2,3 };
+	int nums[4] = { 3,0,1,0 };
 	int *ans;
 	int returnSize = 3;
-	ans = topKFrequent(nums, 5, 2, &returnSize);
+	ans = topKFrequent(nums, 4, 1, &returnSize);
 	return 0;
 }
