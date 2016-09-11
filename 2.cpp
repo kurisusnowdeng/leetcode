@@ -28,10 +28,8 @@ public:
 				x += p2->val;
 				p2 = p2->next;
 			}
-			cout << x << ",";
 			c = x / 10;
 			ListNode* buff = new ListNode(x % 10);
-			cout << buff->val << endl;
 			res->next = buff;
 			res = res->next;
 		}
